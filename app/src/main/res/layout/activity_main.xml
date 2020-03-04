@@ -10,16 +10,18 @@
             type="com.ohyooo.demo.viewmodel.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
+        android:orientation="vertical"
         tools:context=".ui.main.MainActivity">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="@{vm.ui.coreRemaining}"
             android:textColor="@android:color/white"
@@ -31,8 +33,9 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

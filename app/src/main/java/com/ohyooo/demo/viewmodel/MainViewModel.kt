@@ -18,7 +18,7 @@ class MainViewModel : MVVMBaseViewModel() {
             if (resp.errorCode != 0) {
                 showToast(resp.errorMsg)
             } else {
-                ui.coreRemaining.set("${resp.resources?.core?.remaining ?: 0}")
+                ui.coreRemaining.set("Activity: ${resp.resources?.core?.remaining ?: 0}")
             }
         }
     }
@@ -29,7 +29,7 @@ class MainViewModel : MVVMBaseViewModel() {
             if (resp.errorCode != 0) {
                 showToast(resp.errorMsg)
             } else {
-                ui.searchRemaining.set("${resp.resources?.search?.remaining ?: 0}")
+                ui.searchRemaining.set("Fragment: ${resp.resources?.search?.remaining ?: 0}")
             }
         }
     }
