@@ -3,6 +3,7 @@ package com.ohyooo.network.repository
 import com.ohyooo.network.factory.ErrorConverterFactory
 import com.ohyooo.network.model.BaseResponse
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit
 abstract class BaseRepository {
 
     private val httpClient: OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .callTimeout(1, TimeUnit.MINUTES)
             .build()
 
