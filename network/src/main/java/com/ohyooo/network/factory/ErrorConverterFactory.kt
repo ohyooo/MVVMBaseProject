@@ -1,5 +1,6 @@
 package com.ohyooo.network.factory
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import com.google.gson.reflect.TypeToken
@@ -14,14 +15,19 @@ import java.lang.reflect.Type
 
 class ErrorConverterFactory : Converter.Factory() {
 
-    override fun responseBodyConverter(type: Type?, annotations: Array<Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
+    override fun responseBodyConverter(
+        type: Type?,
+        annotations: Array<Annotation>?,
+        retrofit: Retrofit?
+    ): Converter<ResponseBody, *>? {
         val gson = Gson()
         val adapter = gson.getAdapter(TypeToken.get(type))
         return ResponseConverter(gson, adapter)
     }
 }
 
-class ResponseConverter<T>(private val gson: Gson, private val adapter: TypeAdapter<T>) : Converter<ResponseBody, T> {
+class ResponseConverter<T>(private val gson: Gson, private val adapter: TypeAdapter<T>) :
+    Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
         try {
             val originalBody = value.string()
@@ -34,7 +40,7 @@ class ResponseConverter<T>(private val gson: Gson, private val adapter: TypeAdap
                 adapter.fromJson(gson.toJson(resp))
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("ErrorConverterFactory", "ResponseConverter()")
         } finally {
             value.close()
         }
