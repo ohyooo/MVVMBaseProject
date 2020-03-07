@@ -33,7 +33,7 @@ task clean(type: Delete) {
 ext {
     applicationId = "com.ohyooo.demo"
     compileSdkVersion = 29
-    minSdkVersion = 23
+    minSdkVersion = 24
     targetSdkVersion = 29
     versionCode = 1
     versionName = "1"
