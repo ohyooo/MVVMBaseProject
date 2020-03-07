@@ -13,8 +13,14 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {
+        debug {
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -42,5 +48,4 @@ android {
 
 dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension"
 }
