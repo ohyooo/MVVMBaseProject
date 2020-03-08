@@ -9,9 +9,6 @@ import kotlinx.coroutines.launch
 class MainViewModel : MVVMBaseViewModel() {
     val ui = MainUIItem()
 
-    override fun onCreate() {
-    }
-
     fun sendByActivity() {
         viewModelScope.launch {
             val resp = GithubAPIRepository.getRateLimit()
