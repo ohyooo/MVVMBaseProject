@@ -1,36 +1,48 @@
-# Base Project
-MVVM 快速开发工程
+# Android MVVM Base Project
 
-## 模块说明
-* app
-主程序
-* lib
-通用组件，例如 ProgressDialog 之类通用的 View，也可以有单位转换之类的工具类
-* network
-网络模块，retrofit 的封装，以及所有的 response
+------
+## Introduction
 
-## MVVM 部分说明
-### 目录结构
-lib/
-- MVVMBaseActivity
-- MVVMBaseFragment
-- MVVMBaseViewModel
-- MVVMLifecycle
-- MVVMViewModelFactory
+This project is intent to provide a template with basic MVVM architecture framework. You can just copy it to workspace instead of creating a new project from Android Studio.
 
-### 要点
-主要有两点，在 MVVMViewModelFactory 中
-1. 将 Activity 的生命周期传给 ViewModel，使其可以直接获取 onCreate()、onDestroy() 等状态，免去手动调用
-2. 将 Activity - intent - bundle 和 Fragment - arguments 在绑定 ViewModel 时传入，在 viewModel 执行 onCreate() 生命周期时就可以读取到传入的数据
+Advantages:
 
-## TDOD
-完善 README
-DataBinding Adapter
-完善网络模块，更新逻辑，增加 log 显示等
-其它
+- Simple, easy to read
+- Use few libs, save time for gradle syncing
+- No dagger or any other DI lib
 
+## Enviroment
 
+I like to follow the latest stable version
 
+- Android Studio 3.6.1
+- Kotlin 1.3.70-release-Studio3.6-1
+- Project dependencies, see each module's build.gragle
 
+## Module
 
+```cmd
+├───app
+│   ├───app       Application
+│   ├───model     models
+│   ├───ui        activities & fragments
+│   │   ├───main  MainActivity
+│   └───viewmodel viewmodels
+│
+├───lib
+│   ├───adapter   databinding adapter
+│   ├───extension kotlin extensions
+│   └───mvvm      MVVM framework
+│
+└───network
+    ├───api
+    ├───model
+    └───repository
+```
 
+## MVVM
+Usually, a viwemodel can only aware the destroy of its owner in onClear() method. But after making it implements LifecycleObserver and observing owner's lifecycle in ViewModelProvider.Factory. It can use onCreate() or other lifecycle event now.
+Check these codes in MVVMViewModelFactory.kt
+
+## Todo
+many many things..
