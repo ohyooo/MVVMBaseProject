@@ -1,14 +1,14 @@
 package com.ohyooo.lib.mvvm
 
 import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ohyooo.lib.livedata.SingleLiveEvent
 
 abstract class MVVMBaseViewModel : ViewModel(), MVVMLifecycle {
 
     var bundle: Bundle = Bundle()
 
-    val toastLiveData = MutableLiveData<String>()
+    val toastLiveData = SingleLiveEvent<String>()
 
     fun showToast(msg: String?) {
         toastLiveData.postValue(msg)
@@ -17,17 +17,13 @@ abstract class MVVMBaseViewModel : ViewModel(), MVVMLifecycle {
     /**
      * Lifecycle Start
      */
-    override fun onCreate() {
-    }
+    override fun onCreate() {}
 
-    override fun onPause() {
-    }
+    override fun onPause() {}
 
-    override fun onResume() {
-    }
+    override fun onResume() {}
 
-    override fun onDestroy() {
-    }
+    override fun onDestroy() {}
     /**
      * Lifecycle End
      */
