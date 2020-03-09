@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('../signkey.jks')
+            storePassword '123456'
+            keyAlias = 'demo'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId rootProject.ext.applicationId
@@ -24,6 +32,7 @@ android {
             zipAlignEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -46,6 +55,17 @@ android {
     dexOptions {
         preDexLibraries = false
     }
+    android.applicationVariants.all { variant ->
+        if (variant.buildType.name != "debug") {
+            variant.outputs.all {
+                outputFileName = "BaseProject_v${defaultConfig.versionName}b${defaultConfig.versionCode}_${variant.buildType.name}_${getDate()}.apk"
+            }
+        }
+    }
+}
+
+private static def getDate() {
+    return new Date().format('yyyyMMddHHmm')
 }
 
 dependencies {
