@@ -51,7 +51,9 @@ android {
     dataBinding {
         enabled true
     }
-    viewBinding.enabled = true
+    viewBinding {
+        enabled = true
+    }
     dexOptions {
         preDexLibraries = false
     }
