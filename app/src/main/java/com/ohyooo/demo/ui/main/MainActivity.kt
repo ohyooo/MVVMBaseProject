@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.ohyooo.demo.R
 import com.ohyooo.demo.databinding.ActivityMainBinding
 import com.ohyooo.demo.viewmodel.MainViewModel
-import com.ohyooo.lib.extension.replaceFragment
 import com.ohyooo.lib.extension.viewDataBindingOf
 import com.ohyooo.lib.extension.viewModelOf
 import com.ohyooo.lib.mvvm.MVVMBaseActivity
@@ -22,10 +21,8 @@ class MainActivity : MVVMBaseActivity(R.layout.activity_main) {
     }
 
     private fun initData() {
-        mViewModel.sendByActivity()
     }
 
     private fun initViews() {
-        replaceFragment(R.id.container, MainFragment())
     }
 }
