@@ -91,4 +91,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     //
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    //
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

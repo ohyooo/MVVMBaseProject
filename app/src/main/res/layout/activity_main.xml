@@ -9,10 +9,33 @@
             type="com.ohyooo.demo.viewmodel.MainViewModel" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/black"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:context=".ui.main.MainActivity" />
+        tools:context=".ui.main.MainActivity">
+
+        <Button
+            android:id="@+id/insert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="insert" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="delete" />
+
+        <Button
+            android:id="@+id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="list" />
+
+    </LinearLayout>
 </layout>

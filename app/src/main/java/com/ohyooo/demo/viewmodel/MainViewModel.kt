@@ -1,33 +1,29 @@
 package com.ohyooo.demo.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.ohyooo.demo.db.DB
+import com.ohyooo.demo.entity.Message
 import com.ohyooo.demo.model.MainUIItem
 import com.ohyooo.lib.mvvm.MVVMBaseViewModel
-import com.ohyooo.network.repository.GithubAPIRepository
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 
 class MainViewModel : MVVMBaseViewModel() {
     val ui = MainUIItem()
 
-    fun sendByActivity() {
-        viewModelScope.launch {
-            val resp = GithubAPIRepository.getRateLimit()
-            if (resp.errorCode != 0) {
-                showToast(resp.errorMsg)
-            } else {
-                ui.coreRemaining.set("Activity: ${resp.resources?.core?.remaining ?: 0}")
-            }
-        }
+    fun insertMessage() = viewModelScope.launch(IO) {
+        DB.msgDb.msgDao().insertAll(Message(0, "123", "content", System.currentTimeMillis()))
     }
 
-    fun sendByFragment() {
-        viewModelScope.launch {
-            val resp = GithubAPIRepository.getRateLimit()
-            if (resp.errorCode != 0) {
-                showToast(resp.errorMsg)
-            } else {
-                ui.searchRemaining.set("Fragment: ${resp.resources?.search?.remaining ?: 0}")
-            }
-        }
+    fun deleteMessage() = viewModelScope.launch(IO) {
+        DB.msgDb.msgDao().deleteAll()
+    }
+
+    fun listAllMessages() = viewModelScope.launch(IO) {
+        val list = DB.msgDb.msgDao().getAll()
+        Timber.e(Gson().toJson(list))
     }
 }
