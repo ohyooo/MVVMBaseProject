@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 
-abstract class MVVMBaseActivity(@LayoutRes val layoutId: Int) : FragmentActivity() {
+abstract class MVVMBaseActivity(@LayoutRes val layoutId: Int = 0) : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
