@@ -15,6 +15,8 @@ class MainActivity : MVVMBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(vdb.root)
+
         initData()
         initViews()
     }
