@@ -25,5 +25,8 @@ class MainActivity : MVVMBaseActivity() {
     }
 
     private fun initViews() {
+        vdb.button.setOnClickListener {
+
+        }
     }
 }
