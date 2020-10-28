@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 
 android {
     signingConfigs {
+        config {
+            enableV3Signing true
+            enableV4Signing true
+        }
         release {
             storeFile file('../signkey.jks')
             storePassword '123456'
