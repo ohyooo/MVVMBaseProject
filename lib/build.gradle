@@ -34,9 +34,6 @@ android {
     kapt {
         useBuildCache = true
     }
-    androidExtensions {
-        experimental = true
-    }
     buildFeatures {
         dataBinding true
     }
