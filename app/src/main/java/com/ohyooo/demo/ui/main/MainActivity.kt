@@ -1,10 +1,8 @@
 package com.ohyooo.demo.ui.main
 
 import android.os.Bundle
-import com.ohyooo.demo.R
 import com.ohyooo.demo.databinding.ActivityMainBinding
 import com.ohyooo.demo.viewmodel.MainViewModel
-import com.ohyooo.lib.extension.viewDataBindingOf
 import com.ohyooo.lib.extension.viewModelOf
 import com.ohyooo.lib.mvvm.MVVMBaseActivity
 
