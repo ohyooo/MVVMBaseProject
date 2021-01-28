@@ -55,9 +55,6 @@ android {
         dataBinding true
         viewBinding true
     }
-    dexOptions {
-        preDexLibraries = false
-    }
     android.applicationVariants.all { variant ->
         if (variant.buildType.name != "debug") {
             variant.outputs.all {
