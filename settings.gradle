@@ -1,2 +1,0 @@
-include ':app', ':lib', ':network'
-rootProject.name='Demo'
