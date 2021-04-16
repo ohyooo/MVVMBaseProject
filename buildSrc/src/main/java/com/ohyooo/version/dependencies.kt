@@ -1,13 +1,13 @@
 package com.ohyooo.version
 
-private const val kotlin_version = "1.4.32"
+private const val kotlin_version = "1.5.0-RC"
 
 object Ext {
     const val applicationId = "com.ohyooo.demo"
     const val minSdkVersion = 28
     const val compileSdkVersion = 30
     const val buildToolsVersion = "30.0.3"
-    const val targetSdkVersion = 28
+    const val targetSdkVersion = 30
     const val versionCode = 1
     const val versionName = "1.0"
 }
