@@ -1,5 +1,3 @@
-package com.ohyooo.version
-
 private const val kotlin_version = "1.5.0-RC"
 
 object Ext {
@@ -15,7 +13,7 @@ object Ext {
 object Libs {
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.0.0-alpha14"
+        const val AGP = "com.android.tools.build:gradle:7.0.0-alpha15"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 

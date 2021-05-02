@@ -1,4 +1,3 @@
-import com.ohyooo.version.Libs
 
 plugins {
     id("com.android.library")
@@ -8,14 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(com.ohyooo.version.Ext.compileSdkVersion)
-    buildToolsVersion(com.ohyooo.version.Ext.buildToolsVersion)
+    compileSdk = Ext.compileSdkVersion
+    buildToolsVersion = Ext.buildToolsVersion
     defaultConfig {
-        minSdkVersion(com.ohyooo.version.Ext.minSdkVersion)
-        targetSdkVersion(com.ohyooo.version.Ext.targetSdkVersion)
-        versionCode(com.ohyooo.version.Ext.versionCode)
-        versionName(com.ohyooo.version.Ext.versionName)
-        consumerProguardFiles("consumer-rules.pro")
+        minSdk = Ext.minSdkVersion
+        targetSdk = Ext.targetSdkVersion
+        proguardFile("consumer-rules.pro")
     }
     buildTypes {
         debug {
@@ -33,7 +30,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-        useIR = true
     }
 }
 

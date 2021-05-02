@@ -4,8 +4,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(com.ohyooo.version.Libs.Plugin.AGP)
-        classpath(com.ohyooo.version.Libs.Plugin.KGP)
+        classpath(Libs.Plugin.AGP)
+        classpath(Libs.Plugin.KGP)
     }
 }
 
