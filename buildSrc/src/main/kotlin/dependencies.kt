@@ -24,9 +24,9 @@ object Libs {
 
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.3.0-rc01"
-        const val coreKtx = "androidx.core:core-ktx:1.6.0-alpha02"
+        const val coreKtx = "androidx.core:core-ktx:1.6.0-alpha03"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.3"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0-beta01"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0-beta02"
     }
 
     object Squareup {
@@ -40,7 +40,7 @@ object Libs {
         const val timber = "com.jakewharton.timber:timber:4.7.1"
     }
 
-    val implementations = arrayOf(
+    val deps = arrayOf(
         Plugin.AGP,
         Plugin.KGP,
         Kotlin.stdlib,
