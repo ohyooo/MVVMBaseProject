@@ -19,7 +19,7 @@ object Libs {
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0-RC"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
     }
 
     object AndroidX {
