@@ -1,4 +1,4 @@
-private const val kotlin_version = "1.5.0"
+private const val kotlin_version = "1.5.10"
 
 object Ext {
     const val applicationId = "com.ohyooo.demo"
@@ -13,7 +13,7 @@ object Ext {
 object Libs {
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.0.0-alpha15"
+        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha01"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
@@ -25,7 +25,7 @@ object Libs {
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha01"
         const val coreKtx = "androidx.core:core-ktx:1.6.0-beta01"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.3"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha01"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0-beta02"
     }
 
