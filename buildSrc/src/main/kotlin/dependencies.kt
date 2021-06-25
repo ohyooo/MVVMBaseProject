@@ -1,4 +1,4 @@
-private const val kotlin_version = "1.5.10"
+private const val kotlin_version = "1.5.20"
 
 object Ext {
     const val applicationId = "com.ohyooo.demo"
