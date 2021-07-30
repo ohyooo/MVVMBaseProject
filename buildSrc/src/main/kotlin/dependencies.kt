@@ -1,4 +1,4 @@
-private const val kotlin_version = "1.5.20"
+private const val kotlin_version = "1.5.21"
 
 object Ext {
     const val applicationId = "com.ohyooo.demo"
@@ -19,7 +19,7 @@ object Libs {
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
     }
 
     object AndroidX {
