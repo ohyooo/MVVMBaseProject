@@ -13,7 +13,7 @@ object Ext {
 object Libs {
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha05"
+        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha06"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
