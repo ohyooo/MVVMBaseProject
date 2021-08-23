@@ -13,7 +13,7 @@ object Ext {
 object Libs {
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha06"
+        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha08"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
@@ -25,7 +25,7 @@ object Libs {
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha03"
         const val coreKtx = "androidx.core:core-ktx:1.7.0-alpha01"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha05"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha07"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
     }
 
@@ -37,7 +37,7 @@ object Libs {
     }
 
     object Third {
-        const val timber = "com.jakewharton.timber:timber:4.7.1"
+        const val timber = "com.jakewharton.timber:timber:5.0.1"
     }
 
     val deps = arrayOf(

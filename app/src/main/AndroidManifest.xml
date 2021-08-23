@@ -17,6 +17,7 @@
         tools:replace="android:allowBackup,android:supportsRtl">
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +27,7 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="false"
             android:launchMode="singleTop" />
     </application>
 
