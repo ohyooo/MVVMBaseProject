@@ -1,4 +1,3 @@
-private const val kotlin_version = "1.5.21"
 
 object Ext {
     const val applicationId = "com.ohyooo.demo"
@@ -12,8 +11,10 @@ object Ext {
 
 object Libs {
 
+    private const val kotlin_version = "1.5.30"
+
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha09"
+        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha10"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
