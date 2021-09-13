@@ -14,7 +14,7 @@ object Libs {
     private const val kotlin_version = "1.5.30"
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha10"
+        const val AGP = "com.android.tools.build:gradle:7.1.0-alpha11"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
@@ -25,8 +25,8 @@ object Libs {
 
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha03"
-        const val coreKtx = "androidx.core:core-ktx:1.7.0-alpha01"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha07"
+        const val coreKtx = "androidx.core:core-ktx:1.7.0-alpha02"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha08"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
     }
 
