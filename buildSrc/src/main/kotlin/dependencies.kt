@@ -26,7 +26,7 @@ object Libs {
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha03"
         const val coreKtx = "androidx.core:core-ktx:1.7.0-alpha02"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha08"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha09"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
     }
 
