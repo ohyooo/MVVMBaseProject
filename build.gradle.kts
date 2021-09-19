@@ -21,42 +21,27 @@ tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
 
-
 tasks.register<UpdateTask>("update")
 
 abstract class UpdateTask : DefaultTask() {
-    private val MAVEN_CENTRAL_URL = "https://repo1.maven.org/maven2/"
-    private val GOOGLE_URL = "https://dl.google.com/dl/android/maven2/"
+    companion object {
+        private const val MAVEN_CENTRAL_URL = "https://repo1.maven.org/maven2/"
+        private const val GOOGLE_URL = "https://dl.google.com/dl/android/maven2/"
 
-    private val versionRegex = "(?<=<version>)(.*\\n?)(?=</version>)".toRegex()
-    private val numberDotRegex = "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)\$".toRegex()
+        private val versionRegex = "(?<=<version>)(.*\\n?)(?=</version>)".toRegex()
+        private val numberDotRegex = "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)\$".toRegex()
+    }
 
     @TaskAction
     fun update() {
         val stable = false
         val size = Libs.deps.size
         Libs.deps.forEachIndexed i@{ index, dep ->
-            println("$index/$size")
-            val vargs = dep.split(":")
+            println("${index + 1}/$size")
 
-            val url = StringBuffer(GOOGLE_URL)
-            // val url = if (dep.contains("androidx") || dep.contains("google") || dep.contains("com.android.tools.build:gradle")) {
-            //     StringBuffer(GOOGLE_URL)
-            // } else {
-            //     StringBuffer(MAVEN_CENTRAL_URL)
-            // }
+            val lib = Library.parse(dep)
 
-            for (i in 0 until vargs.size - 1) {
-                val w = vargs[i]
-
-                when {
-                    i == 0 && w.contains(".") -> w.split(".").forEach { s ->
-                        url.append(s).append("/")
-                    }
-                    else -> url.append(w).append("/")
-                }
-            }
-            url.append("maven-metadata.xml")
+            val url = StringBuffer(GOOGLE_URL).append(lib.toURL)
 
             val xml = try {
                 java.net.URL(url.toString()).readText()
@@ -90,12 +75,35 @@ abstract class UpdateTask : DefaultTask() {
                 latestVersion.last()
             }
 
-            if (Version.build(lastStable).compare(Version.build(vargs.last())) > 0) {
+            val v1 = Version.parse(lastStable)
+            val v2 = lib.v
+            if (Version.compare(v1, v2) > 0) {
                 println("eeeeee $dep has update for $lastStable")
             }
         }
     }
 
+    private data class Library(
+        val g: String,
+        val n: String,
+        val v: Version,
+    ) {
+        val toURL: String
+            get() = StringBuffer("").apply {
+                append(g.replace(".", "/"))
+                append("/")
+                append(n)
+                append("/maven-metadata.xml")
+            }.toString()
+
+        companion object {
+            fun parse(s: String): Library {
+                val vargs = s.split(":")
+                if (vargs.size != 3) return Library("", "", Version.empty)
+                return Library(vargs[0], vargs[1], Version.parse(vargs[2]))
+            }
+        }
+    }
 
     private data class Version(
         val a: Int,
@@ -103,22 +111,17 @@ abstract class UpdateTask : DefaultTask() {
         val c: Int,
         val r: String,
         val f: Int,
+        val o: String,
     ) {
-        fun compare(v: Version): Int {
-            if (a != v.a) return a.compareTo(v.a)
-            if (b != v.b) return b.compareTo(v.b)
-            if (c != v.c) return c.compareTo(v.c)
-            if (r != v.r) r.int.compareTo(v.r.int)
-            if (f != v.f) return f.compareTo(v.f)
-            return 0
-        }
-
         companion object {
             private const val STABLE = "stable"
             private const val BETA = "beta"
             private const val ALPHA = "alpha"
-            private val releaseType = arrayOf(STABLE, BETA, ALPHA)
+            private const val RC = "RC"
+            private val releaseType = arrayOf(STABLE, RC, BETA, ALPHA)
             private val releaseRegex = "$STABLE|$BETA|$ALPHA".toRegex()
+
+            val empty = Version(0, 0, 0, "", 0, "")
 
             private val String.int: Int
                 get() = when (this) {
@@ -127,7 +130,16 @@ abstract class UpdateTask : DefaultTask() {
                     else -> 0
                 }
 
-            fun build(s: String): Version {
+            fun compare(v1: Version, v2: Version): Int {
+                if (v1.a != v2.a) return v1.a.compareTo(v2.a)
+                if (v1.b != v2.b) return v1.b.compareTo(v2.b)
+                if (v1.c != v2.c) return v1.c.compareTo(v2.c)
+                if (v1.r != v2.r) v1.r.int.compareTo(v2.r.int)
+                if (v1.f != v2.f) return v1.f.compareTo(v2.f)
+                return 0
+            }
+
+            fun parse(s: String): Version {
                 val list = s.split(".")
 
                 if (list.size == 3) {
@@ -136,16 +148,17 @@ abstract class UpdateTask : DefaultTask() {
 
                     val c = list[2].toIntOrNull()
                     if (c != null) {
-                        return Version(a, b, c, "", 0)
+                        return Version(a, b, c, "", 0, s)
                     } else {
                         val rf = list[2]
 
                         val splitList = rf.split("-")
 
-                        if (splitList.size != 2) return Version(0, 0, 0, "", 0)
+                        if (splitList.size < 2) return empty
 
                         val r = when {
                             rf.contains(STABLE) -> STABLE
+                            rf.contains(RC) -> RC
                             rf.contains(BETA) -> BETA
                             rf.contains(ALPHA) -> ALPHA
                             else -> ""
@@ -154,11 +167,11 @@ abstract class UpdateTask : DefaultTask() {
                         val cc = splitList[0].toIntOrNull() ?: 0
                         val f = splitList[1].replace(r, "").toIntOrNull() ?: 0
 
-                        return Version(a, b, cc, r, f)
+                        return Version(a, b, cc, r, f, s)
                     }
                 }
 
-                return Version(0, 0, 0, "", 0)
+                return empty
             }
         }
     }
