@@ -58,7 +58,8 @@ dependencies {
     implementation (Libs.AndroidX.appcompat)
     implementation (Libs.AndroidX.coreKtx)
     implementation (Libs.AndroidX.fragmentKtx)
-    implementation (Libs.AndroidX.constraintLayout)
+    implementation(Libs.AndroidX.constraintLayout)
+    implementation(Libs.AndroidX.recyclerview)
     //
     implementation (Libs.Kotlin.stdlib)
     //

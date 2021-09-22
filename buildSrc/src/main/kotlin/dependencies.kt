@@ -28,6 +28,7 @@ object Libs {
         const val coreKtx = "androidx.core:core-ktx:1.7.0-alpha02"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.0-alpha09"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
     }
 
     object Squareup {
@@ -50,6 +51,7 @@ object Libs {
         AndroidX.coreKtx,
         AndroidX.fragmentKtx,
         AndroidX.constraintLayout,
+        AndroidX.recyclerview,
         Squareup.retrofit,
         Squareup.converter,
         Squareup.log,

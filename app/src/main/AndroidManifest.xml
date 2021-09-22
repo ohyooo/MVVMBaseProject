@@ -16,6 +16,9 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup,android:supportsRtl">
         <activity
+            android:name=".ui.list.ListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:launchMode="singleTop">
