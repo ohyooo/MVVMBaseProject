@@ -39,23 +39,6 @@ jobs:
       - name: Build APK
         run: ./gradlew assembleRelease
 
-      - name: Upload to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: app/build/outputs/apk/release/*.apk
-          tag: ${{ github.ref }}_${{ steps.time.outputs.time }}
-          overwrite: true
-          file_glob: true
-
-      - name: Remove old Releases
-        uses: dev-drprasad/delete-older-releases@v0.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          keep_latest: 3
-          delete_tags: true
-
       - name: Delete workflow runs
         uses: GitRML/delete-workflow-runs@main
         with:
