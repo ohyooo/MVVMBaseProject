@@ -1,0 +1,63 @@
+name: Android CI
+
+on:
+  push:
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 8
+          format: 'YYYYMMDDHHmmss'
+     
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          java-package: jdk
+          
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Update dependencies
+        run: ./gradlew update
+
+      - name: Push Changes
+        run: git config --global user.email "i@ohyooo.com" && git config --global user.name "ohyooo" && git add . && git commit -m "auto update" && git push || true
+
+      - name: Build APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: app/build/outputs/apk/release/*.apk
+          tag: ${{ github.ref }}_${{ steps.time.outputs.time }}
+          overwrite: true
+          file_glob: true
+
+      - name: Remove old Releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          keep_latest: 3
+          delete_tags: true
+
+      - name: Delete workflow runs
+        uses: GitRML/delete-workflow-runs@main
+        with:
+          retain_days: 3
+          keep_minimum_runs: 2
