@@ -30,56 +30,96 @@ abstract class UpdateTask : DefaultTask() {
 
         private val versionRegex = "(?<=<version>)(.*\\n?)(?=</version>)".toRegex()
         private val numberDotRegex = "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)\$".toRegex()
+
+        private const val checkStable = false
+        private const val autoModify = true
+
+        private val stableList = arrayOf(Libs.Plugin.KGP, Libs.Kotlin.stdlib)
     }
 
     @TaskAction
     fun update() {
-        val stable = false
+        val file = if (autoModify) File("./buildSrc/src/main/kotlin/dependencies.kt") else null
+        val text = arrayOf(file?.readText() ?: "")
+
         val size = Libs.deps.size
         Libs.deps.forEachIndexed i@{ index, dep ->
             println("${index + 1}/$size")
+            check(dep, text)
+        }
 
-            val lib = Library.parse(dep)
+        file?.writeText(text[0])
+    }
 
-            val url = StringBuffer(GOOGLE_URL).append(lib.toURL)
+    fun check(dep: String, ktFile: Array<String>) {
+        val lib = Library.parse(dep)
+        if (lib == Library.empty) return
+        val v1 = lib.v
 
-            val xml = try {
-                java.net.URL(url.toString()).readText()
-            } catch (e: Exception) {
-                if (url.contains(GOOGLE_URL)) {
-                    java.net.URL(url.toString().replace(GOOGLE_URL, MAVEN_CENTRAL_URL))
-                } else {
-                    java.net.URL(url.toString().replace(MAVEN_CENTRAL_URL, GOOGLE_URL))
-                }.readText()
-            }
+        val url = GOOGLE_URL + lib.toURL
+        val xml = fetchXML(url)
+        val latest = getLatest(dep, xml) ?: return
 
-            val latestVersion = mutableListOf<String>()
-            xml.split("\n").forEach { l ->
-                versionRegex.find(l)?.value?.let {
-                    latestVersion.add(it)
+        val v2 = Version.parse(latest)
+        if (Version.compare(v1, v2) < 0) {
+            println("eeeeee $dep has update for $latest")
+
+            if (!autoModify) return
+
+            val s = lib.toString
+            if (ktFile[0].indexOf(s) > 0) {
+                ktFile[0] = ktFile[0].replace(s, s.replace(lib.v.toString, v2.o))
+            } else {
+                var index = ktFile[0].indexOf(lib.toName) + lib.toName.length
+                if (ktFile[0][++index] == '$') {
+                    val sb = StringBuilder()
+                    while (true) {
+                        val char = ktFile[0][++index]
+                        if (char != '"') {
+                            sb.append(char)
+                        } else {
+                            val varName = sb.toString()
+                            ktFile[0] = ktFile[0].replace("val $varName = \"${v1.o}\"", "val $varName = \"${v2.o}\"")
+                            break
+                        }
+                    }
                 }
             }
+        }
+    }
 
-            if (latestVersion.isEmpty()) {
-                println("eeeeee $dep latest version=$latestVersion")
-                return@i
+    private fun fetchXML(url: String) = try {
+        java.net.URL(url).readText()
+    } catch (e: Exception) {
+        if (url.contains(GOOGLE_URL)) {
+            java.net.URL(url.replace(GOOGLE_URL, MAVEN_CENTRAL_URL))
+        } else {
+            java.net.URL(url.replace(MAVEN_CENTRAL_URL, GOOGLE_URL))
+        }.readText()
+    }
+
+    private fun getLatest(dep: String, xml: String, stable: Boolean = checkStable): String? {
+        val latestVersion = mutableListOf<String>()
+
+        xml.split("\n").forEach { l ->
+            versionRegex.find(l)?.value?.let {
+                latestVersion.add(it)
             }
+        }
 
-            val lastStable = try {
-                if (stable) {
-                    latestVersion.last { numberDotRegex.matches(it) }
-                } else {
-                    latestVersion.last()
-                }
-            } catch (e: Exception) {
+        if (latestVersion.isEmpty()) {
+            println("eeeeee $dep latest version=$latestVersion")
+            return null
+        }
+
+        return try {
+            if (stable || stableList.contains(dep)) {
+                latestVersion.last { numberDotRegex.matches(it) }
+            } else {
                 latestVersion.last()
             }
-
-            val v1 = Version.parse(lastStable)
-            val v2 = lib.v
-            if (Version.compare(v1, v2) > 0) {
-                println("eeeeee $dep has update for $lastStable")
-            }
+        } catch (e: Exception) {
+            latestVersion.last()
         }
     }
 
@@ -88,7 +128,11 @@ abstract class UpdateTask : DefaultTask() {
         val n: String,
         val v: Version,
     ) {
-        val toURL: String
+        val toString get() = "$g:$n:${v.toString}"
+
+        val toName get() = "$g:$n"
+
+        val toURL
             get() = StringBuffer("").apply {
                 append(g.replace(".", "/"))
                 append("/")
@@ -97,9 +141,11 @@ abstract class UpdateTask : DefaultTask() {
             }.toString()
 
         companion object {
+            val empty = Library("", "", Version.empty)
+
             fun parse(s: String): Library {
                 val vargs = s.split(":")
-                if (vargs.size != 3) return Library("", "", Version.empty)
+                if (vargs.size != 3) return empty
                 return Library(vargs[0], vargs[1], Version.parse(vargs[2]))
             }
         }
@@ -109,10 +155,12 @@ abstract class UpdateTask : DefaultTask() {
         val a: Int,
         val b: Int,
         val c: Int,
-        val r: String,
-        val f: Int,
-        val o: String,
+        val r: String, // release type
+        val f: Int, // release type to int
+        val o: String, // original string
     ) {
+        val toString get() = "$a.$b.$c${if (r.isNotBlank() && f > -1) "-$r${"$f".padStart(2, '0')}" else if (r.isNotBlank()) "-$r" else ""}"
+
         companion object {
             private const val STABLE = "stable"
             private const val BETA = "beta"
@@ -134,7 +182,7 @@ abstract class UpdateTask : DefaultTask() {
                 if (v1.a != v2.a) return v1.a.compareTo(v2.a)
                 if (v1.b != v2.b) return v1.b.compareTo(v2.b)
                 if (v1.c != v2.c) return v1.c.compareTo(v2.c)
-                if (v1.r != v2.r) v1.r.int.compareTo(v2.r.int)
+                if (v1.r != v2.r) return v1.r.int.compareTo(v2.r.int)
                 if (v1.f != v2.f) return v1.f.compareTo(v2.f)
                 return 0
             }
@@ -161,11 +209,11 @@ abstract class UpdateTask : DefaultTask() {
                             rf.contains(RC) -> RC
                             rf.contains(BETA) -> BETA
                             rf.contains(ALPHA) -> ALPHA
-                            else -> ""
+                            else -> rf.subSequence(rf.indexOf("-") + 1, rf.length).toString()
                         }
 
                         val cc = splitList[0].toIntOrNull() ?: 0
-                        val f = splitList[1].replace(r, "").toIntOrNull() ?: 0
+                        val f = splitList[1].replace(r, "").toIntOrNull() ?: -1
 
                         return Version(a, b, cc, r, f, s)
                     }
