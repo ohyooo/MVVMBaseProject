@@ -11,24 +11,24 @@ object Ext {
 
 object Libs {
 
-    private const val kotlin_version = "1.6.10"
+    private const val kotlin_version = "1.7.0"
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.3.0-alpha01"
+        const val AGP = "com.android.tools.build:gradle:7.2.1"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3"
     }
 
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.1"
-        const val coreKtx = "androidx.core:core-ktx:1.8.0-alpha03"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.0-alpha01"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.3"
-        const val recyclerview = "androidx.recyclerview:recyclerview:1.3.0-alpha01"
+        const val coreKtx = "androidx.core:core-ktx:1.8.0"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.1"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.0"
     }
 
     object Squareup {
