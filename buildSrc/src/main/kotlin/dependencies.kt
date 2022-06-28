@@ -24,11 +24,11 @@ object Libs {
     }
 
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.4.1"
+        const val appcompat = "androidx.appcompat:appcompat:1.4.2"
         const val coreKtx = "androidx.core:core-ktx:1.8.0"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.0"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
     }
 
     object Squareup {
