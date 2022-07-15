@@ -11,7 +11,7 @@ object Ext {
 
 object Libs {
 
-    private const val kotlin_version = "1.7.0"
+    private const val kotlin_version = "1.7.10"
 
     object Plugin {
         const val AGP = "com.android.tools.build:gradle:7.2.1"
@@ -20,13 +20,13 @@ object Libs {
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     }
 
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.2"
         const val coreKtx = "androidx.core:core-ktx:1.8.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.4.1"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.0"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
     }
