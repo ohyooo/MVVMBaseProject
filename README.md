@@ -1,6 +1,7 @@
 # Android MVVM Base Project
 
 ------
+
 ## Introduction
 
 This project is intent to provide a template with basic MVVM architecture framework. You can just copy it to workspace instead of creating a new project from Android Studio.
@@ -10,14 +11,6 @@ Advantages:
 - Simple, easy to read
 - Use few libs, save time for gradle syncing
 - No dagger or any other DI lib
-
-## Enviroment
-
-I like to follow the latest stable version
-
-- Android Studio 3.6.1
-- Kotlin 1.3.70-release-Studio3.6-1
-- Project dependencies, see each module's build.gragle
 
 ## Module
 

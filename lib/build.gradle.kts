@@ -1,10 +1,10 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
+    namespace = "com.ohyooo.lib"
     compileSdk = Ext.compileSdkVersion
     buildToolsVersion = Ext.buildToolsVersion
     defaultConfig {

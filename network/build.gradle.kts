@@ -2,11 +2,11 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
     id("kotlin-parcelize")
 }
 
 android {
+    namespace = "com.ohyooo.network"
     compileSdk = Ext.compileSdkVersion
     buildToolsVersion = Ext.buildToolsVersion
     defaultConfig {

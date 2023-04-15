@@ -2,19 +2,19 @@
 object Ext {
     const val applicationId = "com.ohyooo.demo"
     const val minSdkVersion = 16
-    const val compileSdkVersion = 32
-    const val buildToolsVersion = "32.0.0"
-    const val targetSdkVersion = 32
+    const val compileSdkVersion = 33
+    const val buildToolsVersion = "33.0.3"
+    const val targetSdkVersion = 33
     const val versionCode = 1
     const val versionName = "1.0"
 }
 
 object Libs {
 
-    private const val kotlin_version = "1.7.10"
+    private const val kotlin_version = "1.8.20"
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:7.2.1"
+        const val AGP = "com.android.tools.build:gradle:8.0.0"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
@@ -24,11 +24,11 @@ object Libs {
     }
 
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.4.2"
-        const val coreKtx = "androidx.core:core-ktx:1.8.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.6.1"
+        const val coreKtx = "androidx.core:core-ktx:1.10.0"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.6"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-        const val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
+        const val recyclerview = "androidx.recyclerview:recyclerview:1.3.0"
     }
 
     object Squareup {

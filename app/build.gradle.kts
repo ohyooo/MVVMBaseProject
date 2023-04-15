@@ -1,11 +1,11 @@
 plugins {
     id ("com.android.application")
     kotlin ("android")
-    kotlin ("kapt")
     id ("kotlin-parcelize")
 }
 
 android {
+    namespace = "com.ohyooo.demo"
     signingConfigs {
         getByName("debug") {
             storeFile = file("..\\signkey.jks")
