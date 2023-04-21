@@ -26,7 +26,7 @@ object Libs {
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.6.1"
         const val coreKtx = "androidx.core:core-ktx:1.10.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.6"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.7"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.3.0"
     }
@@ -35,7 +35,7 @@ object Libs {
         private const val retrofit2_version = "2.9.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofit2_version"
         const val converter = "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-        const val log = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+        const val log = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11"
     }
 
     object Third {
