@@ -19,7 +19,7 @@ class ErrorConverterFactory : Converter.Factory() {
         type: Type?,
         annotations: Array<Annotation>?,
         retrofit: Retrofit?
-    ): Converter<ResponseBody, *>? {
+    ): Converter<ResponseBody, *> {
         val gson = Gson()
         val adapter = gson.getAdapter(TypeToken.get(type))
         return ResponseConverter(gson, adapter)

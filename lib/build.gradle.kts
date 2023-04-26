@@ -9,7 +9,6 @@ android {
     buildToolsVersion = Ext.buildToolsVersion
     defaultConfig {
         minSdk = Ext.minSdkVersion
-        targetSdk = Ext.targetSdkVersion
         proguardFile("consumer-rules.pro")
     }
     buildTypes {

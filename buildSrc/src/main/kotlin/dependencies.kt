@@ -3,7 +3,7 @@ object Ext {
     const val applicationId = "com.ohyooo.demo"
     const val minSdkVersion = 16
     const val compileSdkVersion = 33
-    const val buildToolsVersion = "33.0.3"
+    const val buildToolsVersion = "33.0.2"
     const val targetSdkVersion = 33
     const val versionCode = 1
     const val versionName = "1.0"
@@ -11,7 +11,7 @@ object Ext {
 
 object Libs {
 
-    private const val kotlin_version = "1.8.20"
+    private const val kotlin_version = "1.8.21"
 
     object Plugin {
         const val AGP = "com.android.tools.build:gradle:8.0.0"
