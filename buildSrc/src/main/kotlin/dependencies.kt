@@ -14,7 +14,7 @@ object Libs {
     private const val kotlin_version = "1.8.21"
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:8.0.0"
+        const val AGP = "com.android.tools.build:gradle:8.0.1"
         const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
