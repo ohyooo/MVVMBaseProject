@@ -11,15 +11,18 @@ object Ext {
 
 object Libs {
 
-    private const val kotlin_version = "1.8.21"
+    object Version {
+        const val agp = "8.0.1"
+        const val kotlin = "1.8.21"
+    }
 
     object Plugin {
-        const val AGP = "com.android.tools.build:gradle:8.0.1"
-        const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        const val AGP = "com.android.tools.build:gradle:${Version.agp}"
+        const val KGP = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
     }
 
     object Kotlin {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Version.kotlin}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     }
 

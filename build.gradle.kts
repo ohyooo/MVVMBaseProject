@@ -1,30 +1,19 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath(Libs.Plugin.AGP)
-        classpath(Libs.Plugin.KGP)
-    }
+@file:Suppress("UnstableApiUsage")
+
+plugins {
+    id("com.android.application") version Libs.Version.agp apply false
+    kotlin("android") version Libs.Version.kotlin apply false
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             jvmTarget = "17"
-            freeCompilerArgs = freeCompilerArgs + listOf("-opt-in=kotlin.RequiresOptIn", "-Xuse-k2", "-Xbackend-threads=12", "-Xcontext-receivers", "-jvm-target=17")
+            freeCompilerArgs += listOf(
+                "-Xbackend-threads=12", "-Xcontext-receivers", "-jvm-target=17"
+            )
         }
     }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
 }
 
 tasks.register<UpdateTask>("update")
@@ -49,6 +38,9 @@ abstract class UpdateTask : DefaultTask() {
         val text = arrayOf(file?.readText() ?: "")
 
         val size = Libs.deps.size
+        Libs.deps.forEachIndexed i@{ index, dep ->
+            println("$dep")
+        }
         Libs.deps.forEachIndexed i@{ index, dep ->
             println("${index + 1}/$size")
             check(dep, text)
