@@ -19,7 +19,7 @@ kgp = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 # Kotlin
 stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
 
 # AndroidX
 appcompat = "androidx.appcompat:appcompat:1.6.1"
