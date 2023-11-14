@@ -30,12 +30,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Update dependencies
-        run: ./gradlew update
-
-      - name: Push Changes
-        run: git config --global user.email "i@ohyooo.com" && git config --global user.name "ohyooo" && git add . && git commit -m "auto update" && git push || true
-
       - name: Build APK
         run: ./gradlew assembleRelease
 
