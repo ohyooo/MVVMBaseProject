@@ -7,10 +7,9 @@ plugins {
 
 android {
     namespace = "com.ohyooo.network"
-    compileSdk = Ext.compileSdkVersion
-    buildToolsVersion = Ext.buildToolsVersion
+    compileSdk = libs.versions.compile.sdk.get().toInt()
     defaultConfig {
-        minSdk = Ext.minSdkVersion
+        minSdk = libs.versions.min.sdk.get().toInt()
         proguardFile("consumer-rules.pro")
     }
     buildTypes {
@@ -30,9 +29,9 @@ android {
 }
 
 dependencies {
-    implementation(Libs.Kotlin.coroutines)
+    implementation(libs.coroutines)
     //
-    implementation(Libs.Squareup.retrofit)
-    implementation(Libs.Squareup.converter)
-    implementation(Libs.Squareup.log)
+    implementation(libs.retrofit)
+    implementation(libs.converter)
+    implementation(libs.log)
 }

@@ -5,10 +5,9 @@ plugins {
 
 android {
     namespace = "com.ohyooo.lib"
-    compileSdk = Ext.compileSdkVersion
-    buildToolsVersion = Ext.buildToolsVersion
+	compileSdk = libs.versions.compile.sdk.get().toInt()
     defaultConfig {
-        minSdk = Ext.minSdkVersion
+        minSdk = libs.versions.min.sdk.get().toInt()
         proguardFile("consumer-rules.pro")
     }
     buildTypes {
@@ -31,5 +30,5 @@ android {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.fragmentKtx)
+    implementation(libs.fragmentKtx)
 }
