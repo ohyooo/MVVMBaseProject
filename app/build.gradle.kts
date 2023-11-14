@@ -58,8 +58,6 @@ dependencies {
     implementation(libs.constraintLayout)
     implementation(libs.recyclerview)
     //
-    implementation (libsstdlib)
-    //
     implementation (libs.timber)
 }
 
