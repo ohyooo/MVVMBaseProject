@@ -1,31 +1,25 @@
-name: Auto Merge
+name: Dependabot Merge
 
 on:
-  pull_request:
-    types: [labeled, synchronize, opened, reopened, ready_for_review]
-  check_suite:
-    types: [completed]
+  pull_request_target:
+    types:
+      - opened
 
 jobs:
-  auto-merge:
+  dependabot-merge:
     runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
     steps:
-      - name: Merge Pull Requests
-        if: github.actor == 'dependabot[bot]' && github.event_name == 'check_suite' && github.event.check_suite.conclusion == 'success'
-        uses: actions/github-script@v4
+      - uses: peter-evans/find-comment@main
+        id: find-comment
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const pullRequest = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-            });
-            if (pullRequest.data.state === 'open') {
-              await github.rest.pulls.merge({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                merge_method: 'squash', // 或者 'merge' 或 'rebase'
-              });
-            }
+          token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: '@dependabot squash and merge'
+      - uses: peter-evans/create-or-update-comment@main
+        with:
+          token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: '@dependabot squash and merge'
+          edit-mode: replace
