@@ -7,19 +7,19 @@ updates:
     registries:
       - maven-google
       - gradle-plugin
-    group:
-      name: gradle-updates
-      packages:
-        - '*'
+    groups:
+      maven-dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
-    group:
-      name: github-actions-updates
-      packages:
-        - '*'
+    groups:
+      github-actions:
+        patterns:
+          - "*"
 
 registries:
   maven-google:
