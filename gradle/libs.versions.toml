@@ -6,8 +6,8 @@ compile_sdk = "34"
 version_code = "10"
 version_name = "2.10"
 
-agp = "8.2.2"
-kotlin = "1.9.22"
+agp = "8.3.0"
+kotlin = "1.9.23"
 retrofit2 = "2.9.0"
 
 
