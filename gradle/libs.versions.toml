@@ -1,8 +1,8 @@
 [versions]
 application_id = "com.ohyooo.demo"
 min_sdk = "21"
-target_sdk = "34"
-compile_sdk = "34"
+target_sdk = "35"
+compile_sdk = "35"
 version_code = "10"
 version_name = "2.10"
 
