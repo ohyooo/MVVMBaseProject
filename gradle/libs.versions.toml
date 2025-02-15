@@ -6,7 +6,7 @@ compile_sdk = "35"
 version_code = "10"
 version_name = "2.10"
 
-agp = "8.8.0"
+agp = "8.8.1"
 kotlin = "2.1.10"
 retrofit2 = "2.11.0"
 
@@ -24,7 +24,7 @@ coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1"
 # AndroidX
 appcompat = "androidx.appcompat:appcompat:1.7.0"
 coreKtx = "androidx.core:core-ktx:1.15.0"
-fragmentKtx = "androidx.fragment:fragment-ktx:1.8.5"
+fragmentKtx = "androidx.fragment:fragment-ktx:1.8.6"
 constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.0"
 recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 
