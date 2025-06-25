@@ -6,8 +6,8 @@ compile_sdk = "35"
 version_code = "10"
 version_name = "2.10"
 
-agp = "8.10.1"
-kotlin = "2.1.21"
+agp = "8.11.0"
+kotlin = "2.2.0"
 retrofit2 = "3.0.0"
 
 
@@ -22,16 +22,16 @@ stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "ko
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
 
 # AndroidX
-appcompat = "androidx.appcompat:appcompat:1.7.0"
+appcompat = "androidx.appcompat:appcompat:1.7.1"
 coreKtx = "androidx.core:core-ktx:1.16.0"
-fragmentKtx = "androidx.fragment:fragment-ktx:1.8.7"
+fragmentKtx = "androidx.fragment:fragment-ktx:1.8.8"
 constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 
 # Squareup
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
 converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit2" }
-log = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14"
+log = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.16"
 
 # Third
 timber = "com.jakewharton.timber:timber:5.0.1"
