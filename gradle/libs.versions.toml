@@ -6,7 +6,7 @@ compile_sdk = "35"
 version_code = "10"
 version_name = "2.10"
 
-agp = "8.11.0"
+agp = "8.11.1"
 kotlin = "2.2.0"
 retrofit2 = "3.0.0"
 
