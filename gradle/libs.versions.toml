@@ -7,7 +7,7 @@ version_code = "10"
 version_name = "2.10"
 
 agp = "8.13.0"
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 retrofit2 = "3.0.0"
 
 
@@ -31,7 +31,7 @@ recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 # Squareup
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
 converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit2" }
-log = "com.squareup.okhttp3:logging-interceptor:5.1.0"
+log = "com.squareup.okhttp3:logging-interceptor:5.2.1"
 
 # Third
 timber = "com.jakewharton.timber:timber:5.0.1"
