@@ -31,7 +31,7 @@ recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 # Squareup
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
 converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit2" }
-log = "com.squareup.okhttp3:logging-interceptor:5.3.0"
+log = "com.squareup.okhttp3:logging-interceptor:5.3.1"
 
 # Third
 timber = "com.jakewharton.timber:timber:5.0.1"
