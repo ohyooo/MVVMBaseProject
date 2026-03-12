@@ -23,7 +23,7 @@ coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
 
 # AndroidX
 appcompat = "androidx.appcompat:appcompat:1.7.1"
-coreKtx = "androidx.core:core-ktx:1.17.0"
+coreKtx = "androidx.core:core-ktx:1.18.0"
 fragmentKtx = "androidx.fragment:fragment-ktx:1.8.9"
 constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
