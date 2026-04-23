@@ -10,9 +10,9 @@ plugins {
 allprojects {
     tasks.withType<KotlinCompile>().configureEach {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+            jvmTarget.set(JvmTarget.JVM_21)
             freeCompilerArgs.addAll(
-                "-Xbackend-threads=12",
+                "-Xbackend-threads=4",
                 "-opt-in=kotlin.RequiresOptIn",
             )
         }
