@@ -9,7 +9,7 @@ import com.ohyooo.lib.extension.bindBaseLiveData
 
 class MVVMViewModelFactory(private val context: Context, private val lifecycle: Lifecycle) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val clazz = modelClass.newInstance()
+        val clazz = modelClass.getDeclaredConstructor().newInstance()
         if (clazz is MVVMBaseViewModel) {
             lifecycle.addObserver(clazz)
             if (context is MVVMBaseActivity) {

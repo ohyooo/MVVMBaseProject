@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-    kotlin("android")
 }
 
 android {
@@ -12,8 +11,7 @@ android {
     }
     buildTypes {
         debug {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "consumer-rules.pro")
+            isMinifyEnabled = false
         }
         release {
             isMinifyEnabled = true

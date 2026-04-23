@@ -15,7 +15,7 @@ abstract class BaseRepository {
             .build()
 
     inline fun <reified T : BaseResponse> getResponse(method: () -> T): T {
-        var resp = T::class.java.newInstance()
+        var resp = T::class.java.getDeclaredConstructor().newInstance()
         try {
             resp = method.invoke()
         } catch (e: HttpException) {

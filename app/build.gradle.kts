@@ -2,7 +2,16 @@
 
 plugins {
     id("com.android.application")
-    kotlin("android")
+}
+val gitVersion = if (!File(rootDir.path + "/.git").exists()) {
+    ""
+} else {
+    providers.exec {
+        commandLine("git", "rev-parse", "--short", "HEAD")
+        workingDir = rootDir
+    }.standardOutput.asText.map { output ->
+        output.trim().takeIf { it.isNotEmpty() }?.let { "-$it" } ?: ""
+    }.getOrElse("")
 }
 
 android {
@@ -18,13 +27,13 @@ android {
         }
     }
     namespace = libs.versions.application.id.get()
-	compileSdk = libs.versions.compile.sdk.get().toInt()
+    compileSdk = libs.versions.compile.sdk.get().toInt()
     defaultConfig {
         applicationId = libs.versions.application.id.get()
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = libs.versions.version.code.get().toInt()
-        versionName = libs.versions.target.sdk.get() + hashTag
+        versionName = libs.versions.target.sdk.get() + gitVersion
         proguardFile("proguard-rules.pro")
         signingConfig = signingConfigs.getByName("debug")
     }
@@ -37,9 +46,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
@@ -59,22 +65,3 @@ dependencies {
     //
     implementation (libs.timber)
 }
-
-val hashTag: String
-    get() {
-        if (!File(rootDir.path + "/.git").exists()) return ""
-        return ProcessBuilder(listOf("git", "rev-parse", "--short", "HEAD"))
-            .directory(rootDir)
-            .redirectOutput(ProcessBuilder.Redirect.PIPE)
-            .redirectError(ProcessBuilder.Redirect.PIPE)
-            .start()
-            .apply { waitFor(5, TimeUnit.SECONDS) }
-            .run {
-                val error = errorStream.bufferedReader().readText().trim()
-                if (error.isNotEmpty()) {
-                    ""
-                } else {
-                    "-" + inputStream.bufferedReader().readText().trim()
-                }
-            }
-    }

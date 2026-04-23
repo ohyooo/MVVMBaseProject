@@ -1,10 +1,11 @@
 [versions]
 application_id = "com.ohyooo.demo"
-min_sdk = "21"
+min_sdk = "23"
 target_sdk = "35"
-compile_sdk = "35"
+compile_sdk = "36"
 version_code = "10"
 version_name = "2.10"
+compile-minor = "1"
 
 agp = "9.2.0"
 kotlin = "2.3.20"

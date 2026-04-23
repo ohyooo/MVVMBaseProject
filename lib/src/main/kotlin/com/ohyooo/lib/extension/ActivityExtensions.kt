@@ -15,7 +15,10 @@ import com.ohyooo.lib.mvvm.MVVMBaseViewModel
 import com.ohyooo.lib.mvvm.MVVMViewModelFactory
 
 inline fun <reified VB : ViewDataBinding> Activity.viewDataBindingOf(): VB {
-    return DataBindingUtil.findBinding((findViewById<ViewGroup>(android.R.id.content)).getChildAt(0))!!
+    val rootView = findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
+        ?: error("No content view found for ${this::class.java.simpleName}")
+    return DataBindingUtil.findBinding(rootView)
+        ?: error("No ViewDataBinding found for ${this::class.java.simpleName}")
 }
 
 inline fun <reified VM : ViewModel> ComponentActivity.viewModelOf(): Lazy<VM> {

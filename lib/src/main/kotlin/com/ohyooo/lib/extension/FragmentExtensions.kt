@@ -12,14 +12,15 @@ import com.ohyooo.lib.mvvm.MVVMBaseViewModel
 import com.ohyooo.lib.mvvm.MVVMViewModelFactory
 
 inline fun <reified VB : ViewDataBinding> Fragment.viewDataBindingOf(): VB {
-    return DataBindingUtil.bind(view!!)!!
+    return DataBindingUtil.bind(requireView())
+        ?: error("No ViewDataBinding found for ${this::class.java.simpleName}")
 }
 
 inline fun <reified VM : ViewModel> Fragment.viewModelOf(useActivity: Boolean = false): Lazy<VM> {
     return if (useActivity) {
         activityViewModels { MVVMViewModelFactory(requireActivity(), lifecycle) }
     } else {
-        viewModels { MVVMViewModelFactory(context!!, lifecycle) }
+        viewModels { MVVMViewModelFactory(requireContext(), lifecycle) }
     }
 }
 
