@@ -4,7 +4,11 @@ plugins {
 
 android {
     namespace = "com.ohyooo.lib"
-	compileSdk = libs.versions.compile.sdk.get().toInt()
+    compileSdk {
+        version = release(libs.versions.compile.sdk.get().toInt()) {
+            minorApiLevel = libs.versions.compile.minor.get().toInt()
+        }
+    }
     defaultConfig {
         minSdk = libs.versions.min.sdk.get().toInt()
         consumerProguardFiles("consumer-rules.pro")
@@ -14,7 +18,7 @@ android {
             isMinifyEnabled = false
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
         }
     }
     compileOptions {
