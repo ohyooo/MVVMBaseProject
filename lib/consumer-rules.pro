@@ -1,0 +1,2 @@
+-dontwarn com.ohyooo.lib.mvvm.MVVMBaseActivity
+-dontwarn com.ohyooo.lib.mvvm.MVVMViewModelFactory
