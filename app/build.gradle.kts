@@ -27,7 +27,11 @@ android {
         }
     }
     namespace = libs.versions.application.id.get()
-    compileSdk = libs.versions.compile.sdk.get().toInt()
+    compileSdk {
+        version = release(libs.versions.compile.sdk.get().toInt()) {
+            minorApiLevel = libs.versions.compile.minor.get().toInt()
+        }
+    }
     defaultConfig {
         applicationId = libs.versions.application.id.get()
         minSdk = libs.versions.min.sdk.get().toInt()
