@@ -7,15 +7,14 @@ android {
 	compileSdk = libs.versions.compile.sdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.min.sdk.get().toInt()
-        proguardFile("consumer-rules.pro")
+        consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
         debug {
             isMinifyEnabled = false
         }
         release {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "consumer-rules.pro")
+            isMinifyEnabled = false
         }
     }
     compileOptions {
