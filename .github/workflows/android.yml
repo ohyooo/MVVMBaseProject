@@ -19,15 +19,6 @@ jobs:
           distribution: 'zulu'
           java-version: '21'
           java-package: jdk
-          
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
 
       - name: Build APK
-        run: ./gradlew assembleRelease
-
-      - name: Delete workflow runs
-        uses: GitRML/delete-workflow-runs@main
-        with:
-          retain_days: 3
-          keep_minimum_runs: 2
+        run: chmod +x gradlew && ./gradlew assembleRelease
