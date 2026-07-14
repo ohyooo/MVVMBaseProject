@@ -8,7 +8,7 @@ version_name = "2.10"
 compile-minor = "0"
 
 agp = "9.2.1"
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 retrofit2 = "3.0.0"
 
 
