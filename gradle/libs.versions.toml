@@ -22,9 +22,9 @@ kgp = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0"
 
 # AndroidX
-appcompat = "androidx.appcompat:appcompat:1.7.1"
+appcompat = "androidx.appcompat:appcompat:1.8.0"
 coreKtx = "androidx.core:core-ktx:1.19.0"
-fragmentKtx = "androidx.fragment:fragment-ktx:1.8.9"
+fragmentKtx = "androidx.fragment:fragment-ktx:1.9.0"
 constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.2"
 recyclerview = "androidx.recyclerview:recyclerview:1.4.0"
 
