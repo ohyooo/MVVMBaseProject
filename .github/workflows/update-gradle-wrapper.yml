@@ -5,15 +5,20 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+permissions:
+  contents: read
+
 jobs:
   update-gradle-wrapper:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Setup JDK
-        uses: actions/setup-java@main
+        uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: '21'
@@ -21,4 +26,6 @@ jobs:
           cache: 'gradle'
 
       - name: Update Gradle Wrapper
-        uses: gradle-update/update-gradle-wrapper-action@main
+        uses: gradle-update/update-gradle-wrapper-action@v2
+        with:
+          repo-token: ${{ secrets.ACTIONS_TRIGGER_PAT }}
