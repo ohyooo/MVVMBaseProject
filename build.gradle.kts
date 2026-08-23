@@ -12,7 +12,6 @@ allprojects {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
             freeCompilerArgs.addAll(
-                "-Xbackend-threads=4",
                 "-opt-in=kotlin.RequiresOptIn",
             )
         }

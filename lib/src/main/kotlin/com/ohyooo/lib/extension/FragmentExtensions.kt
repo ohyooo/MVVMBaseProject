@@ -20,7 +20,7 @@ inline fun <reified VM : ViewModel> Fragment.viewModelOf(useActivity: Boolean = 
     return if (useActivity) {
         activityViewModels { MVVMViewModelFactory(requireActivity(), lifecycle) }
     } else {
-        viewModels { MVVMViewModelFactory(requireContext(), lifecycle) }
+        viewModels { MVVMViewModelFactory(this, lifecycle) }
     }
 }
 
