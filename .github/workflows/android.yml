@@ -2,23 +2,78 @@ name: Android CI
 
 on:
   push:
+  pull_request:
   repository_dispatch:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: android-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@v7
 
       - name: Setup JDK
         uses: actions/setup-java@v6
         with:
-          distribution: 'zulu'
+          distribution: zulu
           java-version: '21'
           java-package: jdk
 
-      - name: Build APK
-        run: chmod +x gradlew && ./gradlew assembleRelease
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Build
+        run: |
+          chmod +x gradlew
+          ./gradlew \
+            lint \
+            test \
+            assembleRelease \
+            bundleRelease \
+            --stacktrace
+
+      - name: Generate SHA256
+        if: success()
+        run: |
+          find . \
+            -type f \
+            \( -name '*.apk' -o -name '*.aab' \) \
+            -path '*/build/outputs/*' \
+            -print0 \
+            | sort -z \
+            | xargs -0 -r sha256sum > SHA256SUMS
+
+      - name: Upload release artifacts
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-release
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            **/build/outputs/apk/**/*.apk
+            **/build/outputs/bundle/**/*.aab
+            **/build/outputs/mapping/**/mapping.txt
+            **/build/outputs/native-debug-symbols/**/*.zip
+            SHA256SUMS
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-reports
+          retention-days: 7
+          if-no-files-found: ignore
+          path: |
+            **/build/reports/**
+            **/build/test-results/**
